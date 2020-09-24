@@ -2,6 +2,7 @@
 Ever get stuck in SCP-914 with three SCPs outside, waiting for you to leave just so you can be instantly murdered? No longer! This plugin allows you to put yourself through SCP-914 on a specific setting and escape.
 
 ## Configurations
+More settings are planned.
 | Setting         | Type           | Default                                                                   | Description                                                                                                                 |
 |-----------------|----------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | IsEnabled       | boolean        | false                                                                     | Enables/Disables the plugin                                                                                                 |
