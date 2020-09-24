@@ -13,6 +13,13 @@ namespace Scp914Teleportation
 {
     public class Scp914Teleportation : Plugin<Config>
     {
+        public override string Name { get; } = "Scp914Teleportation";
+        public override string Author { get; } = "Thunder";
+        public override Version Version { get; } = new Version(0, 1);
+        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 6);
+
+        public override string Prefix { get; } = "Scp914Teleportation";
+
         public static Scp914Teleportation Instance;
 
         public override PluginPriority Priority { get; } = PluginPriority.Low;
