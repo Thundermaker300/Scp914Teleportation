@@ -6,8 +6,8 @@ Ever get stuck in SCP-914 with three SCPs outside, waiting for you to leave just
 |-----------------|----------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | IsEnabled       | boolean        | false                                                                     | Enables/Disables the plugin                                                                                                 |
 | TeleportMode    | Scp914Knob     | Coarse                                                                    | Determines the mode to teleport on.                                                                                         |
-| TeleportRooms   | List<RoomType> | [LczCafe, LczCrossing, LczStraight, LczTCross, LczPlants, LczClassDSpawn] | Determines the rooms that players can teleport to.                                                                          |
-| TeleportEffects | List<string>   | ["Damage:50", "ApplyEffect:Blinded:2",  "ApplyEffect:Amnesia:2"]          | Determines what happens to players upon teleporting through SCP-914. See below for a list of valid strings for this config. |
+| TeleportRooms   | RoomType List  | [LczCafe, LczCrossing, LczStraight, LczTCross, LczPlants, LczClassDSpawn] | Determines the rooms that players can teleport to.                                                                          |
+| TeleportEffects | String List    | ["Damage:50", "ApplyEffect:Blinded:2",  "ApplyEffect:Amnesia:2"]          | Determines what happens to players upon teleporting through SCP-914. See below for a list of valid strings for this config. |
 
 ## TeleportEffects - Valid Strings
 `Damage:N` - Deals N damage to the user upon teleporting.  
