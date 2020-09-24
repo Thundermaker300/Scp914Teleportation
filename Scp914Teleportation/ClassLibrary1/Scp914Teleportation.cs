@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace Scp914Teleportation
 {
-    public class Class1
+    public class Scp914Teleportation
     {
     }
 }
