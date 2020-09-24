@@ -20,5 +20,6 @@ namespace Scp914Teleportation
 
         [Description("Determines what rooms can be teleported to using SCP-914 teleportation.")]
         public List<RoomType> TeleportRooms { get; set; } = new List<RoomType> { };
+
     }
 }

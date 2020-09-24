@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MEC;
+using UnityEngine;
+using Random = System.Random;
+
 namespace Scp914Teleportation
 {
     public class EventHandlers
@@ -24,7 +28,10 @@ namespace Scp914Teleportation
                     RoomType roomType = Scp914Teleportation.Instance.Config.TeleportRooms.ElementAt(roomIndex);
                     Room teleportRoom = Map.Rooms.Where(r => r.Type == roomType).First();
 
-                    Ply.Position = teleportRoom.Position;
+                    Timing.CallDelayed(0.1f, () =>
+                    {
+                        Ply.Position = teleportRoom.Position + new Vector3(0,2,0);
+                    });
                 }
             }
         }
