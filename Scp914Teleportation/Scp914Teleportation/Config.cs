@@ -19,7 +19,7 @@ namespace Scp914Teleportation
         public Scp914Knob TeleportMode { get; set; } = Scp914Knob.Coarse;
 
         [Description("Determines what rooms can be teleported to using SCP-914 teleportation.")]
-        public List<RoomType> TeleportRooms { get; set; } = new List<RoomType> { };
+        public List<RoomType> TeleportRooms { get; set; } = new List<RoomType> { RoomType.LczCafe, RoomType.LczCrossing, RoomType.LczStraight, RoomType.LczTCross, RoomType.LczPlants, RoomType.LczClassDSpawn };
 
         [Description("Determines what happens to the player while teleporting. See GitHub page for an example on how to use this.")]
         public List<string> TeleportEffects { get; set; } = new List<string> { "Damage:50", "ApplyEffect:Blinded:2", "ApplyEffect:Amnesia:2", };
