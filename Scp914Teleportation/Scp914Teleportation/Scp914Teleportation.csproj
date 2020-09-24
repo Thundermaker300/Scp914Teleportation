@@ -58,6 +58,7 @@
     <Reference Include="Exiled.Updater">
       <HintPath>..\..\..\EXILED References\Exiled.Updater.dll</HintPath>
     </Reference>
+    <Reference Include="Mirror, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
