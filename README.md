@@ -10,6 +10,6 @@ Ever get stuck in SCP-914 with three SCPs outside, waiting for you to leave just
 | TeleportEffects | List<string>   | ["Damage:50", "ApplyEffect:Blinded:2",  "ApplyEffect:Amnesia:2"]          | Determines what happens to players upon teleporting through SCP-914. See below for a list of valid strings for this config. |
 
 ## TeleportEffects - Valid Strings
-`Damage:N` - Deals N damage to the user upon teleporting.
-`ApplyEffect:EffectType:Duration` - Applies the EffectType effect for the Duration (in seconds).
+`Damage:N` - Deals N damage to the user upon teleporting.  
+`ApplyEffect:EffectType:Duration` - Applies the EffectType effect for the Duration (in seconds).  
 (More soon!)
