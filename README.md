@@ -1,0 +1,2 @@
+## SCP-914 Teleportation
+Ever get stuck in SCP-914 with three SCPs outside, waiting for you to leave just so they can be instantly murdered? No longer! This plugin allows you to put yourself through SCP-914 on a specific setting and escape. There are multiple configurable settings.
