@@ -76,6 +76,7 @@ More settings are planned.
 - `EzPcs` - The EZ straight hallway consisting of offices and TV screens.
 - `EzStraight` - A standard EZ straight hallway.
 - `EzUpstairsPcs` - The EZ straight hallway with a stairwell upward, consisting of offices.
-- `EzVent` - One of the EZ red room dead-ends.
+- `EzVent` - One of the EZ red room dead-ends.  
+
 **Surface**  
 - `Surface` - Gate A at the surface.
