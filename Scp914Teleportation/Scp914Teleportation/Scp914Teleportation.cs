@@ -15,7 +15,7 @@ namespace Scp914Teleportation
     {
         public override string Name { get; } = "Scp914Teleportation";
         public override string Author { get; } = "Thunder";
-        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version Version { get; } = new Version(1, 1, 0);
         public override Version RequiredExiledVersion { get; } = new Version(2, 1, 6);
 
         public override string Prefix { get; } = "Scp914Teleportation";
@@ -32,6 +32,8 @@ namespace Scp914Teleportation
 
             Instance = this;
 
+            if (!this.Config.IsEnabled) return;
+
             // Handlers
             Events.Scp914.UpgradingItems += handler.OnUpgradingItems;
         }
@@ -39,6 +41,8 @@ namespace Scp914Teleportation
         public override void OnDisabled()
         {
             base.OnDisabled();
+
+            if (!this.Config.IsEnabled) return;
 
             // Handlers
             Events.Scp914.UpgradingItems -= handler.OnUpgradingItems;

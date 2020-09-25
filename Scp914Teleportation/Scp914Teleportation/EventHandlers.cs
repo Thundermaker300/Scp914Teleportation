@@ -11,6 +11,7 @@ using MEC;
 using UnityEngine;
 using Random = System.Random;
 using CustomPlayerEffects;
+using Exiled.API.Extensions;
 
 namespace Scp914Teleportation
 {
@@ -23,15 +24,21 @@ namespace Scp914Teleportation
         {
             if (ev.KnobSetting == Scp914Teleportation.Instance.Config.TeleportMode)
             {
+                Log.Info("SCP-914 Teleportation activated");
+                int roomIndex = rnd.Next(0, Scp914Teleportation.Instance.Config.TeleportRooms.Count());
                 foreach (Player Ply in ev.Players)
                 {
-                    int roomIndex = rnd.Next(0, Scp914Teleportation.Instance.Config.TeleportRooms.Count());
+                    if (!Scp914Teleportation.Instance.Config.EffectedTeams.Contains(Ply.Team)) return;
                     RoomType roomType = Scp914Teleportation.Instance.Config.TeleportRooms.ElementAt(roomIndex);
                     Room teleportRoom = Map.Rooms.Where(r => r.Type == roomType).First();
 
+                    if (Scp914Teleportation.Instance.Config.TeleportChangeMode == true)
+                    {
+                        roomIndex = rnd.Next(0, Scp914Teleportation.Instance.Config.TeleportRooms.Count());
+                    }
+
                     Timing.CallDelayed(0.1f, () =>
                     {
-                        Log.Debug(teleportRoom.Name);
                         Ply.Position = teleportRoom.Position + new Vector3(0,2,0);
                         ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects);
                     });
