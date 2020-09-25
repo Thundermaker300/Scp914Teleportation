@@ -7,7 +7,7 @@ More settings are planned.
 |--------------------|----------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | IsEnabled          | boolean        | false                                                                     | Enables SCP-914 teleportation.                                                                                                  |
 | TeleportMode       | Scp914Knob     | Coarse                                                                    | Determines what SCP-914 setting will cause the teleport.                                                                        |
-| EffectedTeams      | Team List      | [CDP, RSC, MTF, CHI, SCP, TUT]                                            | Determines what teams are allowed to use SCP-914 teleportation.                                                                 |
+| AffectedTeams      | Team List      | [CDP, RSC, MTF, CHI, SCP, TUT]                                            | Determines what teams are allowed to use SCP-914 teleportation.                                                                 |
 | TeleportChangeMode | boolean        | true                                                                      | If set to true, the room will change every time someone teleports. If set to false, it'll change when the machine is started.   |
 | TeleportChance     | integer        | 50                                                                        | Determines the chance to teleport. Must be between 0 and 100.                                                                   |
 | TeleportBackfire   | boolean        | true                                                                      | If they go through on the specified TeleportMode but do not teleport, should the TeleportEffects listed below still be applied? |
@@ -19,7 +19,7 @@ More settings are planned.
 `ApplyEffect:EffectType:Duration` - Applies the EffectType effect for the Duration (in seconds).  
 (More soon!)
 
-## EffectedTeams - Valid Teams
+## AffectedTeams - Valid Teams
 - `CDP` - Class-D Personnel
 - `RSC` - Scientists
 - `MTF` - Guards + All NTF Ranks

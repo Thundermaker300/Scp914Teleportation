@@ -19,7 +19,7 @@ namespace Scp914Teleportation
         public Scp914Knob TeleportMode { get; set; } = Scp914Knob.Coarse;
 
         [Description("Determines what teams are allowed to use SCP-914 teleportation.")]
-        public List<Team> EffectedTeams { get; set; } = new List<Team> { Team.CDP, Team.RSC, Team.MTF, Team.CHI, Team.SCP, Team.TUT };
+        public List<Team> AffectedTeams { get; set; } = new List<Team> { Team.CDP, Team.RSC, Team.MTF, Team.CHI, Team.SCP, Team.TUT };
 
         [Description("If set to true, the room will change every time someone teleports. If set to false, it'll change when the machine is started.")]
         public bool TeleportChangeMode { get; set; } = true;

@@ -36,7 +36,7 @@ namespace Scp914Teleportation
                         }
                         return;
                     }
-                    if (!Scp914Teleportation.Instance.Config.EffectedTeams.Contains(Ply.Team)) return;
+                    if (!Scp914Teleportation.Instance.Config.AffectedTeams.Contains(Ply.Team)) return;
                     RoomType roomType = Scp914Teleportation.Instance.Config.TeleportRooms.ElementAt(roomIndex);
                     Room teleportRoom = Map.Rooms.Where(r => r.Type == roomType).First();
 
