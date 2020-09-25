@@ -24,6 +24,12 @@ namespace Scp914Teleportation
         [Description("If set to true, the room will change every time someone teleports. If set to false, it'll change when the machine is started.")]
         public bool TeleportChangeMode { get; set; } = true;
 
+        [Description("Determines the chance to teleport. Must be between 0 and 100.")]
+        public int TeleportChance { get; set; } = 50;
+
+        [Description("If they go through on the specified TeleportMode but do not teleport, should the TeleportEffects listed below still be applied?")]
+        public bool TeleportBackfire { get; set; } = true;
+
         [Description("Determines what rooms can be teleported to using SCP-914 teleportation.")]
         public List<RoomType> TeleportRooms { get; set; } = new List<RoomType> { RoomType.LczCafe, RoomType.LczCrossing, RoomType.LczStraight, RoomType.LczTCross, RoomType.LczPlants, RoomType.LczClassDSpawn };
 

@@ -32,6 +32,7 @@ namespace Scp914Teleportation
 
             Instance = this;
 
+
             if (!this.Config.IsEnabled) return;
 
             // Handlers

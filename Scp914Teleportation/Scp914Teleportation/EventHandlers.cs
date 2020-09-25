@@ -27,7 +27,15 @@ namespace Scp914Teleportation
                 Log.Info("SCP-914 Teleportation activated");
                 int roomIndex = rnd.Next(0, Scp914Teleportation.Instance.Config.TeleportRooms.Count());
                 foreach (Player Ply in ev.Players)
-                {
+                { 
+                    if (rnd.Next(0, 100) <= Scp914Teleportation.Instance.Config.TeleportChance)
+                    {
+                        if (Scp914Teleportation.Instance.Config.TeleportBackfire == true)
+                        {
+                            ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects);
+                        }
+                        return;
+                    }
                     if (!Scp914Teleportation.Instance.Config.EffectedTeams.Contains(Ply.Team)) return;
                     RoomType roomType = Scp914Teleportation.Instance.Config.TeleportRooms.ElementAt(roomIndex);
                     Room teleportRoom = Map.Rooms.Where(r => r.Type == roomType).First();
@@ -44,6 +52,7 @@ namespace Scp914Teleportation
                     });
                 }
             }
+
         }
 
         public void ApplyTeleportEffects(Player Ply, List<string> Effects)
@@ -70,7 +79,7 @@ namespace Scp914Teleportation
                         try
                         {
                             int amt = Convert.ToInt32(args.ElementAt(1));
-                            Ply.Health -= amt;
+                            Ply.Hurt(amt, DamageTypes.Wall, "SCP-914 Teleportation");
                         }
                         catch
                         {
