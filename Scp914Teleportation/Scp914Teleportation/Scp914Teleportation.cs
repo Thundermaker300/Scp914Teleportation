@@ -1,6 +1,7 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events;
+using Exiled.Events.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Scp914Teleportation
     {
         public override string Name { get; } = "Scp914Teleportation";
         public override string Author { get; } = "Thunder";
-        public override Version Version { get; } = new Version(1, 2, 1);
+        public override Version Version { get; } = new Version(1, 3, 0);
         public override Version RequiredExiledVersion { get; } = new Version(2, 1, 6);
 
         public override string Prefix { get; } = "Scp914Teleportation";

@@ -3,20 +3,25 @@ Ever get stuck in SCP-914 with three SCPs outside, waiting for you to leave just
 
 ## Configurations
 More settings are planned.
-| Setting            | Type           | Default                                                                   | Description                                                                                                                     |
-|--------------------|----------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| IsEnabled          | boolean        | false                                                                     | Enables SCP-914 teleportation.                                                                                                  |
-| TeleportMode       | Scp914Knob     | Coarse                                                                    | Determines what SCP-914 setting will cause the teleport.                                                                        |
-| AffectedTeams      | Team List      | [CDP, RSC, MTF, CHI, SCP, TUT]                                            | Determines what teams are allowed to use SCP-914 teleportation.                                                                 |
-| TeleportChangeMode | boolean        | true                                                                      | If set to true, the room will change every time someone teleports. If set to false, it'll change when the machine is started.   |
-| TeleportChance     | integer        | 50                                                                        | Determines the chance to teleport. Must be between 0 and 100.                                                                   |
-| TeleportBackfire   | boolean        | true                                                                      | If they go through on the specified TeleportMode but do not teleport, should the TeleportEffects listed below still be applied? |
-| TeleportRooms      | RoomType List  | [LczCafe, LczCrossing, LczStraight, LczTCross, LczPlants, LczClassDSpawn] | Determines what rooms can be teleported to using SCP-914 teleportation.                                                         |
-| TeleportEffects    | String List    | ["Damage:50", "ApplyEffect:Blinded:2",  "ApplyEffect:Amnesia:2"]          | Determines what happens to players upon teleporting through SCP-914. See below for a list of valid strings for this config.     |
+| Setting               | Type           | Default                                                                                   | Description                                                                                                                                            |
+|-----------------------|----------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| IsEnabled             | boolean        | false                                                                                     | Enables SCP-914 teleportation.                                                                                                                         |
+| TeleportMode          | Scp914Knob     | Coarse                                                                                    | Determines what SCP-914 setting will cause the teleport.                                                                                               |
+| AffectedTeams         | Team List      | [CDP, RSC, MTF, CHI, SCP, TUT]                                                            | Determines what teams are allowed to use SCP-914 teleportation.                                                                                        |
+| TeleportChangeMode    | boolean        | true                                                                                      | If set to true, the room will change every time someone teleports. If set to false, it'll change when the machine is started.                          |
+| TeleportChance        | integer        | 50                                                                                        | Determines the chance to teleport. Must be between 0 and 100.                                                                                          |
+| TeleportBackfire      | boolean        | true                                                                                      | If they go through on the specified TeleportMode but do not teleport, should the TeleportEffects listed below still be applied?                        |
+| TeleportRooms         | RoomType List  | [LczCafe, LczCrossing, LczStraight, LczTCross, LczPlants, LczClassDSpawn]                 | Determines what rooms can be teleported to using SCP-914 teleportation.                                                                                |
+| TeleportEffects       | String List    | ["Damage:50", "ApplyEffect:Blinded:2",  "ApplyEffect:Amnesia:2"]                          | Determines what happens to players upon teleporting through SCP-914. See below for a list of valid strings for this config.                            |
+| AlertSCPs             | boolean        | false                                                                                     | Determines if SCPs will be alerted when players teleport.                                                                                              |
+| AlertInformPlayer     | boolean        | true                                                                                      | Determines if the player will be notified that the SCPs know they have teleported (Message will only be shown if the AlertSCPs config is set to true). |
+| TeleportPlayerMessage | string         | The SCPs know you teleported out of SCP-914!                                              | The message to show the teleporting player (if AlertInformSubject and AlertSCPs are true).                                                             |
+| TeleportSCPMessage    | string         | {Name} has just teleported out of SCP-914, and has spawned in {Room}! They are a {Class}. | The message to show SCPs if one or more players teleported using SCP-914 and the AlertSCPs config is set to true.                      |
 
 ## TeleportEffects - Valid Strings
-`Damage:N` - Deals N damage to the user upon teleporting.  
-`ApplyEffect:EffectType:Duration` - Applies the EffectType effect for the Duration (in seconds).  
+- `Damage:N` - Deals N damage to the user upon teleporting. Does no damage to godded users.  
+- `ApplyEffect:EffectType:Duration` - Applies the EffectType effect for the Duration (in seconds).  
+- `Stamina:N` - Sets stamina amount to N. Must be between 0-100 (100 being full stamina and 0 being no stamina). Stamina can only go down, not up, with this effect.  
 (More soon!)
 
 ## AffectedTeams - Valid Teams

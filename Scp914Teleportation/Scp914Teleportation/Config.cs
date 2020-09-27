@@ -36,5 +36,17 @@ namespace Scp914Teleportation
         [Description("Determines what happens to players upon teleporting through SCP-914. See GitHub page for an example on how to use this.")]
         public List<string> TeleportEffects { get; set; } = new List<string> { "Damage:50", "ApplyEffect:Blinded:2", "ApplyEffect:Amnesia:2", };
 
+        [Description("Determines if SCPs will be alerted when players teleport.")]
+        public bool AlertSCPs { get; set; } = false;
+
+        [Description("Determines if the player will be notified that the SCPs know they have teleported (Message will only be shown if the AlertSCPs config is set to true).")]
+        public bool AlertInformPlayer { get; set; } = true;
+
+        [Description("The message to show the teleporting player (if AlertInformSubject and AlertSCPs are true).")]
+        public string TeleportPlayerMessage { get; set; } = "The SCPs know you teleported out of SCP-914!";
+
+        [Description("The message to show SCPs if one or more players teleported using SCP-914 and the AlertSCPs config is set to true.")]
+        public string TeleportSCPMessage { get; set; } = "{Name} has just teleported out of SCP-914, and has spawned in {Room}! They are a {Class}.";
+
     }
 }
