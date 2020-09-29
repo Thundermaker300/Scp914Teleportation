@@ -45,16 +45,5 @@ namespace Scp914Teleportation
         [Description("The message to show SCPs if one or more players teleported using SCP-914 and the AlertSCPs config is set to true.")]
         public string TeleportSCPMessage { get; set; } = "{Name} has just teleported out of SCP-914, and has spawned in {Room}! They are a {Class}.";
 
-        /*
-        
-         CDP:
-          - TeleportRooms
-            - LczCafe:50
-            - LczStraight:50
-        RSC:
-          - TeleportRooms
-            - LczPlants:100
-        */
-
     }
 }
