@@ -22,20 +22,24 @@ namespace Scp914Teleportation
         public Random rnd = new Random();
 
         public List<Player> teleported = new List<Player> { };
-
         public void OnUpgradingItems(UpgradingItemsEventArgs ev)
         {
-            if (ev.KnobSetting == Scp914Teleportation.Instance.Config.TeleportMode)
+            if (Scp914Teleportation.Instance.Config.TeleportEffects.ContainsKey(ev.KnobSetting))
             {
                 Log.Info("SCP-914 Teleportation activated");
                 int roomIndex = rnd.Next(0, Scp914Teleportation.Instance.Config.TeleportRooms.Count());
+                if (!Scp914Teleportation.Instance.Config.TeleportChance.ContainsKey(ev.KnobSetting))
+                {
+                    Log.Warn($"TeleportChance config does not provide a setting for the {ev.KnobSetting.ToString()} 914 setting. Aborting teleportation");
+                    return;
+                }
                 foreach (Player Ply in ev.Players)
                 {
-                    if (rnd.Next(0, 100) > Scp914Teleportation.Instance.Config.TeleportChance)
+                    if (rnd.Next(0, 100) > Scp914Teleportation.Instance.Config.TeleportChance[ev.KnobSetting])
                     {
                         if (Scp914Teleportation.Instance.Config.TeleportBackfire == true)
                         {
-                            ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects);
+                            ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects[ev.KnobSetting]);
                         }
                         return;
                     }
@@ -52,7 +56,7 @@ namespace Scp914Teleportation
                     {
                         Ply.Position = teleportRoom.Position + new Vector3(0,2,0);
                         teleported.Add(Ply);
-                        ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects);
+                        ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects[ev.KnobSetting]);
                     });
                 }
                 Timing.CallDelayed(0.5f, () =>
@@ -75,7 +79,7 @@ namespace Scp914Teleportation
                         {
                             if (SCP.Team == Team.SCP)
                             {
-                                string stringToShow = "\n\n\n\n\n";
+                                string stringToShow = "\n\n\n\n\n\n\n";
                                 foreach (Player Escapee in teleported)
                                 {
                                     if (Escapee.Team == Team.SCP) continue; // Prevent SCPs from being notified about other SCPs using SCP-914 to teleport.
@@ -87,11 +91,11 @@ namespace Scp914Teleportation
                             }
                         }
 
-                        teleported.Clear();
-
                     }
                 });
             }
+
+            teleported.Clear();
 
         }
 
@@ -99,8 +103,6 @@ namespace Scp914Teleportation
         {
             if (Ply == null) return;
             if (Effects.Count == 0) return;
-
-            Log.Info(Ply.Stamina.RemainingStamina);
 
             foreach(string effect in Effects)
             {
