@@ -1,12 +1,8 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Interfaces;
 using Scp914;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scp914Teleportation
 {

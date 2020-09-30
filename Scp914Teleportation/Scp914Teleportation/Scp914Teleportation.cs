@@ -1,13 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
-using Exiled.Events;
-using Exiled.Events.EventArgs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
 
 using Events = Exiled.Events.Handlers;
 
