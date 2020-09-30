@@ -13,6 +13,10 @@ using Random = System.Random;
 using CustomPlayerEffects;
 using Exiled.API.Extensions;
 using Hints;
+using System.ComponentModel;
+using Mirror;
+using Exiled.Permissions.Extensions;
+using RemoteAdmin;
 
 namespace Scp914Teleportation
 {
@@ -56,7 +60,10 @@ namespace Scp914Teleportation
                     {
                         Ply.Position = teleportRoom.Position + new Vector3(0,2,0);
                         teleported.Add(Ply);
-                        ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects[ev.KnobSetting]);
+                        Timing.CallDelayed(Timing.WaitForOneFrame, () =>
+                        {
+                            ApplyTeleportEffects(Ply, Scp914Teleportation.Instance.Config.TeleportEffects[ev.KnobSetting]);
+                        });
                     });
                 }
                 Timing.CallDelayed(0.5f, () =>
@@ -109,6 +116,17 @@ namespace Scp914Teleportation
                 string[] args = effect.Split((":").ToCharArray());
                 switch (args.First().ToLower())
                 {
+                    case "addahp":
+                        if (Ply.Role == RoleType.Scp096) continue;
+                        try
+                        {
+                            Ply.AdrenalineHealth += Convert.ToInt32(args.ElementAt(1));
+                        }
+                        catch
+                        {
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
+                        }
+                        break;
                     case "applyeffect":
                         try
                         {
@@ -116,7 +134,44 @@ namespace Scp914Teleportation
                         }
                         catch
                         {
-                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. Invalid effect type: {effect}.");
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
+                        }
+                        break;
+                    case "broadcast":
+                        try
+                        {
+                            int type = Convert.ToInt32(args.ElementAt(1));
+                            int dur = Convert.ToInt32(args.ElementAt(2));
+                            string msg = string.Join(" ", args.Skip(3));
+                            IEnumerable<Player> Plrs = new List<Player> { };
+                            switch (type)
+                            {
+                                case 0:
+                                    Plrs = new List<Player> { Ply };
+                                    break;
+                                case 1:
+                                    Plrs = Player.List;
+                                    break;
+                                case 2:
+                                    Plrs = Player.List.Where(p => p.Team == Team.SCP);
+                                    break;
+                                case 3:
+                                    Plrs = Player.List.Where(p => CommandProcessor.CheckPermissions(p.Sender, "AdminChat", PlayerPermissions.AdminChat));
+                                    break;
+                                default:
+                                    Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" first argument (type) is invalid.");
+                                    break;
+
+                            }
+                            foreach (Player ToSend in Plrs)
+                            {
+                                ToSend.ClearBroadcasts();
+                                ToSend.Broadcast((ushort)dur, msg.Replace("{Name}", Ply.Nickname).Replace("{Room}", GetRoomName(Ply.CurrentRoom)).Replace("{Class}", $"<color={Ply.Role.GetColor().ToHex()}>{Constants.ClassStrings[Ply.Role.ToString()]}</color>") + "\n");
+                            }
+                        }
+                        catch
+                        {
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
                         }
                         break;
                     case "damage":
@@ -130,10 +185,51 @@ namespace Scp914Teleportation
                         }
                         catch
                         {
-                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. Invalid effect type: {effect}.");
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
+                        }
+                        break;
+                    case "dropitems":
+                        try
+                        {
+                            if (args.ElementAt(1) == "all" || args.ElementAt(1) == "*")
+                            {
+                                Ply.Inventory.ServerDropAll();
+                            }
+                            else
+                            {
+                                int amount = Convert.ToInt32(args.ElementAt(1));
+                                for (int i = 0; i<amount; i++)
+                                {
+                                    int pos = rnd.Next(0, Ply.Inventory.items.Count()-1);
+                                    Ply.DropItem(Ply.Inventory.items.ElementAt(pos));
+                                };
+                            }
+                        }
+                        catch
+                        {
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
+                        }
+                        break;
+                    case "god":
+                        try
+                        {
+                            if (!Ply.IsGodModeEnabled) // do not toggle godmode if they already had it on - that defeats the point
+                            {
+                                Ply.IsGodModeEnabled = true;
+                                Timing.CallDelayed((float)Convert.ToInt32(args.ElementAt(1)), () =>
+                                {
+                                   
+                                    Ply.IsGodModeEnabled = false;
+                                });
+                            }
+                        }
+                        catch
+                        {
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
                         }
                         break;
                     case "stamina":
+                        if (Ply.Team == Team.SCP) break;
                         try
                         {
                             int amt = Convert.ToInt32(args.ElementAt(1)) / 100;
@@ -141,8 +237,11 @@ namespace Scp914Teleportation
                         }
                         catch
                         {
-                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. Invalid effect type: {effect}.");
+                            Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. \"{effect}\" arguments are not valid.");
                         }
+                        break;
+                    default:
+                        Log.Warn($"WARNING: SCP-914 Teleportation effects configured incorrectly. Invalid effect type: {effect}.");
                         break;
                 }
             }

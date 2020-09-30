@@ -5,6 +5,7 @@ using Exiled.Events.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace Scp914Teleportation
     {
         public override string Name { get; } = "Scp914Teleportation";
         public override string Author { get; } = "Thunder";
-        public override Version Version { get; } = new Version(1, 4, 0);
+        public override Version Version { get; } = new Version(1, 5, 0);
         public override Version RequiredExiledVersion { get; } = new Version(2, 1, 6);
 
         public override string Prefix { get; } = "Scp914Teleportation";

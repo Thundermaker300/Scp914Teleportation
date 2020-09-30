@@ -18,9 +18,26 @@ More settings are planned.
 | TeleportSCPMessage    | string                                  | {Name} has just teleported out of SCP-914, and has spawned in {Room}! They are a {Class}. | The message to show SCPs if one or more players teleported using SCP-914 and the AlertSCPs config is set to true.                                                                         |
 
 ## TeleportEffects - Valid Strings
-- `Damage:N` - Deals N damage to the user upon teleporting. Does no damage to godded users.  
+- `AddAHP:Amount` - Gives the player the specified amount of artificial health (AHP)  
+  - Note that this is add, **NOT** set. If player's are teleported back to SCP-914, the effect can be stacked.  
+  - This effect ignores SCP-096 (the rest of the SCPs can use it). I've discovered that this effect breaks SCP-096's hume shield.  
+- `Broadcast:Type:Duration:Message` - Displays a broadcast for Duration (in seconds) with the specified message.  
+  - Valid parameters for `Type`:  
+    - `0` - Will show a broadcast to the person teleporting  
+    - `1` - Will show a broadcast to everyone in the server  
+    - `2` - Will show a broadcast to all SCPs.  
+    - `3` - Will show a broadcast to all users with the AdminChat RA permission.
+  - Valid text replacements in `Message`:
+    - `{Name}` will turn into the teleported player's name.
+    - `{Class}` will turn into the teleported player's class (and color it).
+    - `{Room}` will turn into the name of the room the player teleported into.
 - `ApplyEffect:EffectType:Duration` - Applies the EffectType effect for the Duration (in seconds).  
-- `Stamina:N` - Sets stamina amount to N. Must be between 0-100 (100 being full stamina and 0 being no stamina). Stamina can only go down, not up, with this effect.  
+- `Damage:N` - Deals N damage to the user upon teleporting. Does no damage to godded users.  
+- `DropItems:N` - Drops the amount of items specified from the player's inventory (chooses items randomly). Set N to `*` to drop all items in their inventory.
+- `God:N` - Puts the player on god mode (can't take damage/die) for N seconds.  
+- `Stamina:N` - Sets player's stamina amount to N. Must be between 0-100 (100 being full stamina and 0 being no stamina).
+  - Stamina can only go down, not up, with this effect.  
+  - This effect ignores SCPs
 (More soon!)
 
 ## AffectedTeams - Valid Teams
