@@ -21,6 +21,8 @@ namespace Scp914Teleportation
 
         private EventHandlers handler = new EventHandlers();
 
+        public static bool enabledInGame = true;
+
         public override void OnEnabled()
         {
             base.OnEnabled();

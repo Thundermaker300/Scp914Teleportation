@@ -22,6 +22,7 @@ namespace Scp914Teleportation
         public List<Player> teleported = new List<Player> { };
         public void OnUpgradingItems(UpgradingItemsEventArgs ev)
         {
+            if (!Scp914Teleportation.enabledInGame) return;
             if (Scp914Teleportation.Instance.Config.TeleportEffects.ContainsKey(ev.KnobSetting))
             {
                 Log.Info("SCP-914 Teleportation activated");

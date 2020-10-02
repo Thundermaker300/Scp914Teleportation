@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Exiled.API.Features;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Scp914Teleportation
 {
@@ -33,5 +36,23 @@ namespace Scp914Teleportation
             // Other
             ["Tutorial"] = "Tutorial",
         };
+
+        public List<Player> GetPlayersFromString(string str)
+        {
+            if (str == "*")
+            {
+                return Player.List.ToList();
+            }
+            try
+            {
+                int number = Convert.ToInt32(str);
+                return new List<Player> { Player.Get(number) };
+            }
+            catch
+            {
+                Log.Warn("Error in 'GetPlayersFromString' method");
+            }
+            return new List<Player> { };
+        }
     }
 }
