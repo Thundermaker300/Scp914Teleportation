@@ -11,7 +11,7 @@ namespace Scp914Teleportation
         public override string Name { get; } = "Scp914Teleportation";
         public override string Author { get; } = "Thunder";
         public override Version Version { get; } = new Version(1, 5, 0);
-        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 6);
+        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 16);
 
         public override string Prefix { get; } = "Scp914Teleportation";
 
